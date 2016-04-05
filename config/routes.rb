@@ -1,4 +1,15 @@
 Rails.application.routes.draw do
+  get 'dashboard/login'
+
+  get 'users/show'
+
+  get 'users/create'
+
+  get '/auth/github', as: :github_login
+  get '/auth/github/callback', to: 'sessions#create'
+  delete '/logout', to: "sessions#destroy"
+  resources :users, only: [:show]
+  root "dashboard#login"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

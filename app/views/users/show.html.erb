@@ -1,0 +1,33 @@
+<h1>Users#show</h1>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="col-md-3">
+        <%= image_tag(@user.image, size: "175x200") %></br>
+        <%= @user.name %></br>
+        <%= @user.nickname %>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- Build a basic version of the Github profile / feed UI. As a user, I should be able to:
+
+Authenticate with my github account
+View basic information about my account (profile pic, number of starred repos, followers, following)
+View contribution summary information (Contributions in last year, longest streak, current streak)
+View a summary feed of my recent activity (recent commits)
+View a summary feed of recent activity from users whom I follow
+View a list of organizations I'm a member of
+View a list of my repositories
+Extensions:
+
+View a list of open pull requests that I have opened
+View a list of "@mentions" that I was included in
+Create a new repository
+Planning & Requirements -->

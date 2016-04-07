@@ -8,31 +8,32 @@
           <a href="/account" aria-label="Change your avatar" class="vcard-avatar d-block tooltipped tooltipped-s"><%= image_tag("https://avatars2.githubusercontent.com/u/10384487?v=3&amp;s=460", class: "avatar rounded-2", height: "230", width: "230") %></a>
 
         <h1 class="vcard-names my-3">
-          <div class="vcard-fullname" itemprop="name"><%= @user.name %></br></div>
-            <div class="vcard-username" itemprop="additionalName"><%= @user.nickname %></div>
+
+          <div class="vcard-fullname" itemprop="name"><%= current_user.name %></br></div>
+            <div class="vcard-username" itemprop="additionalName"><%= current_user.nickname %></div>
         </h1>
 
       <ul class="vcard-details border-top border-gray-light py-3">
-        <li aria-label="Email" class="vcard-detail py-1 css-truncate css-truncate-target" itemprop="email"><svg aria-hidden="true" class="octicon octicon-mail" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path d="M0 4v8c0 0.55 0.45 1 1 1h12c0.55 0 1-0.45 1-1V4c0-0.55-0.45-1-1-1H1c-0.55 0-1 0.45-1 1z m13 0L7 9 1 4h12zM1 5.5l4 3L1 11.5V5.5z m1 6.5l3.5-3 1.5 1.5 1.5-1.5 3.5 3H2z m11-0.5L9 8.5l4-3v6z"></path></svg><a href="mailto:%74%68%65%6f%62%74%75%73%65%61%75%74%6f%64%69%64%61%63%74@%67%6d%61%69%6c.%63%6f%6d"> <%= @user.email %></a></li>
+        <li aria-label="Email" class="vcard-detail py-1 css-truncate css-truncate-target" itemprop="email"><svg aria-hidden="true" class="octicon octicon-mail" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path d="M0 4v8c0 0.55 0.45 1 1 1h12c0.55 0 1-0.45 1-1V4c0-0.55-0.45-1-1-1H1c-0.55 0-1 0.45-1 1z m13 0L7 9 1 4h12zM1 5.5l4 3L1 11.5V5.5z m1 6.5l3.5-3 1.5 1.5 1.5-1.5 3.5 3H2z m11-0.5L9 8.5l4-3v6z"></path></svg><a href="mailto:%74%68%65%6f%62%74%75%73%65%61%75%74%6f%64%69%64%61%63%74@%67%6d%61%69%6c.%63%6f%6d"> <%= current_user.email %></a></li>
       </ul>
 
               <div class="vcard-stats border-top border-bottom border-gray-light mb-3 py-3">
-            <a class="vcard-stat" href="https://www.github.com/<%= @user.nickname %>/followers">
-              <strong class="vcard-stat-count d-block"><%= @followers.count %></strong>
+            <a class="vcard-stat" href="https://www.github.com/<%= current_user.nickname %>/followers">
+              <strong class="vcard-stat-count d-block"><%= @user.followers.count %></strong>
               <span class="text-muted">Followers</span>
             </a>
             <a class="vcard-stat" href="https://www.github.com/stars">
-              <strong class="vcard-stat-count d-block"><%= @starred.count %></strong>
+              <strong class="vcard-stat-count d-block"><%= @user.starred.count %></strong>
               <span class="text-muted">Starred</span>
             </a>
-            <a class="vcard-stat" href="https://www.github.com/<%= @user.nickname %>/following">
-              <strong class="vcard-stat-count d-block"><%= @following.count %></strong>
+            <a class="vcard-stat" href="https://www.github.com/<%= current_user.nickname %>/following">
+              <strong class="vcard-stat-count d-block"><%= @user.following.count %></strong>
               <span class="text-muted">Following</span>
               </a>
               </div>
               <div class="clearfix">
                 <h3>Organizations</h3>
-                  <% @orgs.each do |org| %>
+                  <% @user.orgs.each do |org| %>
                     <%= link_to image_tag(org.avatar_url, alt: "@#{org.login}", class: "avatar", height: "42", width: "42"), "https://www.github.com/#{org.login}"  %>
               <!-- <a href="/TestingTuringTesting" aria-label="TestingTuringTesting" class="tooltipped tooltipped-n avatar-group-item" itemprop="follows"><img alt="@TestingTuringTesting" class="avatar" height="42" src="https://avatars2.githubusercontent.com/u/17713133?v=3&amp;s=84" width="42"></a> -->
                   <% end %>
@@ -41,10 +42,10 @@
   </div>
     <div class="col-md-9">
       <ul class="repo-list js-repo-list" data-filterable-for="your-repos-filter" data-filterable-type="substring">
-<% @repositories.each do |repo| %>
+<% @user.repositories.each do |repo| %>
   <div class="repo-list-item public source" itemprop="owns" itemscope="" itemtype="http://schema.org/Code">
     <div class="repo-list-stats">
-      <a class="repo-list-stat-item tooltipped tooltipped-s" href="#{repo.full_name}/stargazers" aria-label="Stargazers">
+      <a class="repo-list-stat-item tooltipped tooltipped-s" href="<%= repo.full_name %>/stargazers" aria-label="Stargazers">
         <svg aria-hidden="true" class="octicon octicon-star" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path d="M14 6l-4.9-0.64L7 1 4.9 5.36 0 6l3.6 3.26L2.67 14l4.33-2.33 4.33 2.33L10.4 9.26 14 6z"></path></svg>
         <%= repo.stargazers_count %>
       </a>

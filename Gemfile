@@ -11,6 +11,7 @@ gem 'figaro'
 gem 'pg'
 gem 'omniauth-github'
 gem 'faraday'
+
 group :development, :test do
   gem 'pry-rails'
   gem 'rspec-rails', '~> 3.0'

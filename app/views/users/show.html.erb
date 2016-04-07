@@ -1,26 +1,89 @@
-<h1>Users#show</h1>
 
 <div class="container">
   <div class="row">
     <div class="col-md-12">
       <div class="col-md-3">
-        <%= image_tag(@user.image, size: "175x200") %></br>
-        <%= @user.name %></br>
-        <%= @user.nickname %>
-      </div>
 
+        <div class="column one-fourth vcard" itemscope="" itemtype="http://schema.org/Person">
+          <a href="/account" aria-label="Change your avatar" class="vcard-avatar d-block tooltipped tooltipped-s"><%= image_tag("https://avatars2.githubusercontent.com/u/10384487?v=3&amp;s=460", class: "avatar rounded-2", height: "230", width: "230") %></a>
+
+        <h1 class="vcard-names my-3">
+          <div class="vcard-fullname" itemprop="name"><%= @user.name %></br></div>
+            <div class="vcard-username" itemprop="additionalName"><%= @user.nickname %></div>
+        </h1>
+
+      <ul class="vcard-details border-top border-gray-light py-3">
+        <li aria-label="Email" class="vcard-detail py-1 css-truncate css-truncate-target" itemprop="email"><svg aria-hidden="true" class="octicon octicon-mail" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path d="M0 4v8c0 0.55 0.45 1 1 1h12c0.55 0 1-0.45 1-1V4c0-0.55-0.45-1-1-1H1c-0.55 0-1 0.45-1 1z m13 0L7 9 1 4h12zM1 5.5l4 3L1 11.5V5.5z m1 6.5l3.5-3 1.5 1.5 1.5-1.5 3.5 3H2z m11-0.5L9 8.5l4-3v6z"></path></svg><a href="mailto:%74%68%65%6f%62%74%75%73%65%61%75%74%6f%64%69%64%61%63%74@%67%6d%61%69%6c.%63%6f%6d"> <%= @user.email %></a></li>
+      </ul>
+
+              <div class="vcard-stats border-top border-bottom border-gray-light mb-3 py-3">
+            <a class="vcard-stat" href="https://www.github.com/<%= @user.nickname %>/followers">
+              <strong class="vcard-stat-count d-block"><%= @followers.count %></strong>
+              <span class="text-muted">Followers</span>
+            </a>
+            <a class="vcard-stat" href="https://www.github.com/stars">
+              <strong class="vcard-stat-count d-block"><%= @starred.count %></strong>
+              <span class="text-muted">Starred</span>
+            </a>
+            <a class="vcard-stat" href="https://www.github.com/<%= @user.nickname %>/following">
+              <strong class="vcard-stat-count d-block"><%= @following.count %></strong>
+              <span class="text-muted">Following</span>
+              </a>
+              </div>
+              <div class="clearfix">
+                <h3>Organizations</h3>
+                  <% @orgs.each do |org| %>
+                    <%= link_to image_tag(org.avatar_url, alt: "@#{org.login}", class: "avatar", height: "42", width: "42"), "https://www.github.com/#{org.login}"  %>
+              <!-- <a href="/TestingTuringTesting" aria-label="TestingTuringTesting" class="tooltipped tooltipped-n avatar-group-item" itemprop="follows"><img alt="@TestingTuringTesting" class="avatar" height="42" src="https://avatars2.githubusercontent.com/u/17713133?v=3&amp;s=84" width="42"></a> -->
+                  <% end %>
+              </div>
+    </div>
+  </div>
+    <div class="col-md-9">
+      <ul class="repo-list js-repo-list" data-filterable-for="your-repos-filter" data-filterable-type="substring">
+<% @repositories.each do |repo| %>
+  <div class="repo-list-item public source" itemprop="owns" itemscope="" itemtype="http://schema.org/Code">
+    <div class="repo-list-stats">
+      <a class="repo-list-stat-item tooltipped tooltipped-s" href="#{repo.full_name}/stargazers" aria-label="Stargazers">
+        <svg aria-hidden="true" class="octicon octicon-star" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path d="M14 6l-4.9-0.64L7 1 4.9 5.36 0 6l3.6 3.26L2.67 14l4.33-2.33 4.33 2.33L10.4 9.26 14 6z"></path></svg>
+        <%= repo.stargazers_count %>
+      </a>
+      <a class="repo-list-stat-item tooltipped tooltipped-s" href="/TheObtuseAutodidact/hello-world/network" aria-label="Forks">
+        <svg aria-hidden="true" class="octicon octicon-git-branch" height="16" version="1.1" viewBox="0 0 10 16" width="10"><path d="M10 5c0-1.11-0.89-2-2-2s-2 0.89-2 2c0 0.73 0.41 1.38 1 1.72v0.3c-0.02 0.52-0.23 0.98-0.63 1.38s-0.86 0.61-1.38 0.63c-0.83 0.02-1.48 0.16-2 0.45V4.72c0.59-0.34 1-0.98 1-1.72 0-1.11-0.89-2-2-2S0 1.89 0 3c0 0.73 0.41 1.38 1 1.72v6.56C0.41 11.63 0 12.27 0 13c0 1.11 0.89 2 2 2s2-0.89 2-2c0-0.53-0.2-1-0.53-1.36 0.09-0.06 0.48-0.41 0.59-0.47 0.25-0.11 0.56-0.17 0.94-0.17 1.05-0.05 1.95-0.45 2.75-1.25s1.2-1.98 1.25-3.02h-0.02c0.61-0.36 1.02-1 1.02-1.73zM2 1.8c0.66 0 1.2 0.55 1.2 1.2s-0.55 1.2-1.2 1.2-1.2-0.55-1.2-1.2 0.55-1.2 1.2-1.2z m0 12.41c-0.66 0-1.2-0.55-1.2-1.2s0.55-1.2 1.2-1.2 1.2 0.55 1.2 1.2-0.55 1.2-1.2 1.2z m6-8c-0.66 0-1.2-0.55-1.2-1.2s0.55-1.2 1.2-1.2 1.2 0.55 1.2 1.2-0.55 1.2-1.2 1.2z"></path></svg>
+        <%= repo.forks_count %>
+      </a>
     </div>
 
-  </div>
+    <h3 class="repo-list-name">
+      <%= link_to repo.name, "https://www.github.com/#{repo.full_name}", itemprop: "name codeRepository" %>
+    </h3>
 
+
+
+      <p class="repo-list-description" itemprop="description">
+        <%= repo.description %>
+      </p>
+
+    <p class="repo-list-meta">
+        Updated <time datetime="<%= repo.updated_at %>" is="relative-time" title="">on <%= repo.updated_at %></time>
+    </p>
+
+  <hr>
+
+  </div>
+  <% end %>
+</ul>
+    </div>
+  </div>
+  </div>
 </div>
 
 
 <!-- Build a basic version of the Github profile / feed UI. As a user, I should be able to:
 
 Authenticate with my github account
-View basic information about my account (profile pic, number of starred repos, followers, following)
-View contribution summary information (Contributions in last year, longest streak, current streak)
+*View basic information about my account (profile pic, number of starred repos, followers, following)
+View contribution summary information (Contributions in last year, longest streak, current streak) ** to be scraped
 View a summary feed of my recent activity (recent commits)
 View a summary feed of recent activity from users whom I follow
 View a list of organizations I'm a member of

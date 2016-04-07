@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   get 'dashboard/login'
 
   get 'users/show'
@@ -10,6 +11,8 @@ Rails.application.routes.draw do
   delete '/logout', to: "sessions#destroy"
   resources :users, only: [:show]
   root "dashboard#login"
+
+  resources :repos, only: [:index]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

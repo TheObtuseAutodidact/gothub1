@@ -1,4 +1,4 @@
-class GithubUser 
+class GithubUser
 
   def initialize(current_user)
     set_service_with_user(current_user)

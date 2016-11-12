@@ -81,5 +81,3 @@ test:
 production:
   <<: *default
   database: gothub1_production
-  username: gothub1
-  password: <%= ENV['GOTHUB1_DATABASE_PASSWORD'] %>
